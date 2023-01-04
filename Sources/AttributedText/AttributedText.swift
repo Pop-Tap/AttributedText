@@ -42,7 +42,12 @@ public struct AttributedText: View {
     )
     .fixedSize(horizontal: false, vertical: true)
     .onReceive(textSizeViewModel.$textSize) { size in
-        textSize = size
+      guard let size = size,
+            size.width > 0,
+            size.height > 0 else {
+        return
+      }
+      textSize = size
     }
   }
 }
